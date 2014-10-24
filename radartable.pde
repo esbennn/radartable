@@ -9,6 +9,8 @@ PFont font;
 ArrayList <Ingredienser> ingredienser = new ArrayList<Ingredienser>();
 private Ingredienser[] protIngredienser;// = new Ingredienser[6];
 
+float curX;
+float curY;
 void setup() {
 
   size(1000, 800);
@@ -35,11 +37,12 @@ void draw() {
   background (0, 0, 51);
   for (int i=0; i<protIngredienser.length; i++) {
 
-    protIngredienser[i].update();
+    protIngredienser[i].update(curX, curY);
   }
   for (int i=0; i<ingredienser.size(); i++) {
-
-    ingredienser.get(i).update();
+//println(curX + curY);
+    ingredienser.get(i).update(curX, curY);
+    
   }
 
   // Import all TUIO-objects on the table (as a "Vector"-object),
@@ -76,8 +79,8 @@ void draw() {
 
     // -> -> -> ---NEW CODE--- <- <- <- //
 
-    float curX = tcur.getScreenX(width);
-    float curY = tcur.getScreenY(height);
+    curX = tcur.getScreenX(width);
+    curY = tcur.getScreenY(height);
 
     //Set the stroke to cyan, using a fixed alpha-value
     stroke(50, 255, 255, 100);

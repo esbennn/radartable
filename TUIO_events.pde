@@ -22,7 +22,7 @@ void addTuioCursor(TuioCursor tcur) {
     int x = tcur.getScreenX(width);
     int y = tcur.getScreenY(height);
     boolean imagePressed = protIngredienser[i].pressingOfMouse(x,y);
-
+println(imagePressed);
     if (imagePressed) {
       PImage tempImage = protIngredienser[i].getUsedPicture();
       float tempX = protIngredienser[i].getX();
@@ -32,7 +32,9 @@ void addTuioCursor(TuioCursor tcur) {
   }
   
   for (int j=0; j<ingredienser.size(); j++) {
-    boolean imagePressed2 = ingredienser.get(j).pressingOfMouse(mouseX, mouseY);
+   int x = tcur.getScreenX(width);
+    int y = tcur.getScreenY(height);
+    boolean imagePressed2 = ingredienser.get(j).pressingOfMouse(x, y);
   }
 }
 

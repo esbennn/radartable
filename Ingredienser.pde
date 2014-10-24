@@ -42,18 +42,36 @@ class Ingredienser { //the circles class. Here, everything concerning the change
     imageMode(CENTER);
     image(food, bx, by, foodWidth, foodHeight);
   }
+    public void update(float x, float y) {
+      float tempX = x;
+      float tempY = y;
+      
+    if (tempX > bx-boxSize && tempX < bx+boxSize && 
+      tempY > by-boxSize && tempY < by+boxSize) {
+      overBox = true;  
+      if (!locked) { 
+        stroke(255);
+      }
+    } 
+    else {
+
+      overBox = false;
+    }
+    imageMode(CENTER);
+    image(food, bx, by, foodWidth, foodHeight);
+  }
 
   void mousedrag(int x, int y) { //checks if the specific circle is pressed, and "pushes" a boolean, and changes the x and y variables to whereever the mouse is
-    println("mousedrag");
+  
     if (locked) {
       bx = x-xOffset; 
       by = y-yOffset; 
-      println("yesss");
+     
     }
   }
 
   boolean pressingOfMouse(int x, int y) {
-    println("jeps");
+    
     if (overBox) { 
       locked = true; 
       fill(255, 255, 255);
