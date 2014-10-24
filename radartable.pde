@@ -7,15 +7,35 @@ float brickSize = 90;
 float fontSize = 8;
 PFont font;
 ArrayList <Ingredienser> ingredienser = new ArrayList<Ingredienser>();
-private Ingredienser[] protIngredienser = new Ingredienser[6];
+private Ingredienser[] protIngredienser;// = new Ingredienser[6];
 
 void setup() {
 
   size(1000, 800);
+<<<<<<< HEAD
   for (int i=0; i<protIngredienser.length; i++) {
     protIngredienser[i] = new Ingredienser (str(i), i*(width/6)+100, 100); //size and placement of circles
   }
   tuioClient  = new TuioProcessing(this);
+=======
+ // for (int i=0; i<protIngredienser.length; i++) {
+ //   protIngredienser[i] = new Ingredienser (str(i), i*(width/6)+100, 100); //size and placement of circles
+ // }
+ String imgPath = sketchPath + "/pics";
+ File[] files = listFiles(imgPath);
+ println(files);
+ println(files.length);
+ protIngredienser = new Ingredienser[files.length];
+ 
+ for (int i = 0; i<files.length; i++){
+   //create image
+   PImage img = loadImage(files[i].toString());
+   //create new ingredient with above image
+   Ingredienser newIngredient = new Ingredienser(i*(width/files.length)+100, 100, img);
+   //add the ingredient to protIngredienser
+   protIngredienser[i] = newIngredient;
+ }
+>>>>>>> 40acdd9f28139a75b4245729062eb0b14c3aec52
 }
 
 void draw() {
@@ -71,6 +91,18 @@ void draw() {
     // Draw an ellipse around the cursor
     ellipse(curX, curY, cursorSize, cursorSize);
   }
+}
+
+//returnerer indholdet af den mappe, der gives med som argument
+File[] listFiles(String dir) {
+ File file = new File(dir);
+ if (file.isDirectory()) {
+   File[] files = file.listFiles();
+   return files;
+ } else {
+   // .... hvis stien ikke er en mappe
+   return null;
+ }
 }
 
 void mousePressed() {
