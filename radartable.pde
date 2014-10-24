@@ -30,12 +30,11 @@ void mousePressed() {
       float tempX = protIngredienser[i].getX();
       float tempY = protIngredienser[i].getY();
       ingredienser.add(new Ingredienser(tempX, tempY, tempImage));
-
-      for (int j=0; j<ingredienser.size(); j++) {
-        boolean imagePressed2 = ingredienser.get(j).pressingOfMouse();
-      }
     }
   }
+        for (int j=0; j<ingredienser.size(); j++) {
+        boolean imagePressed2 = ingredienser.get(j).pressingOfMouse();
+      }
 }
 
 void mouseDragged() {
