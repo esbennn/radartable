@@ -12,12 +12,12 @@ private Ingredienser[] protIngredienser;// = new Ingredienser[6];
 void setup() {
 
   size(1000, 800);
-<<<<<<< HEAD
-  for (int i=0; i<protIngredienser.length; i++) {
+
+  /*for (int i=0; i<protIngredienser.length; i++) {
     protIngredienser[i] = new Ingredienser (str(i), i*(width/6)+100, 100); //size and placement of circles
-  }
+  }*/
   tuioClient  = new TuioProcessing(this);
-=======
+
  // for (int i=0; i<protIngredienser.length; i++) {
  //   protIngredienser[i] = new Ingredienser (str(i), i*(width/6)+100, 100); //size and placement of circles
  // }
@@ -35,7 +35,7 @@ void setup() {
    //add the ingredient to protIngredienser
    protIngredienser[i] = newIngredient;
  }
->>>>>>> 40acdd9f28139a75b4245729062eb0b14c3aec52
+
 }
 
 void draw() {
