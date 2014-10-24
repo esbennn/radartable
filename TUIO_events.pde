@@ -1,4 +1,4 @@
-// These are all functions, that are automatically called when something happens on the Radar-table.
+/*// These are all functions, that are automatically called when something happens on the Radar-table.
 // "tbri" and "tcur", again, refers to the objects and cursors in question.
 
 // Called when an object (tbri) is added to the table
@@ -35,4 +35,4 @@ void removeTuioCursor(TuioCursor tcur) {
 // representing the end of an image frame.
 void refresh(TuioTime bundleTime) { 
   redraw();
-}
+}*/
