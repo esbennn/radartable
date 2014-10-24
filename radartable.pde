@@ -1,11 +1,11 @@
 ArrayList <Ingredienser> ingredienser = new ArrayList<Ingredienser>();
-private Ingredienser[] protIngredienser = new Ingredienser[5];
+private Ingredienser[] protIngredienser = new Ingredienser[6];
 
 void setup() {
-
+  
   size(1000, 800);
   for (int i=0; i<protIngredienser.length; i++) {
-    protIngredienser[i] = new Ingredienser (str(i), i*200+50, 100); //size and placement of circles
+    protIngredienser[i] = new Ingredienser (str(i), i*(width/6)+100, 100); //size and placement of circles
   }
 }
 
@@ -32,15 +32,14 @@ void mousePressed() {
       ingredienser.add(new Ingredienser(tempX, tempY, tempImage));
     }
   }
-        for (int j=0; j<ingredienser.size(); j++) {
-        boolean imagePressed2 = ingredienser.get(j).pressingOfMouse();
-      }
+  for (int j=0; j<ingredienser.size(); j++) {
+    boolean imagePressed2 = ingredienser.get(j).pressingOfMouse();
+  }
 }
 
 void mouseDragged() {
 
   for (int i=0; i<ingredienser.size(); i++) {
-
 
     ingredienser.get(i).mousedrag(); //check if mouse is dragging each circle
   }
@@ -48,9 +47,9 @@ void mouseDragged() {
 
 void mouseReleased() {
 
-  for (int i=0; i<protIngredienser.length; i++) {
+/*  for (int i=0; i<protIngredienser.length; i++) {
     protIngredienser[i].setMouseReleased(false);
-  }
+  }*/
 
   for (int j=0; j<ingredienser.size(); j++) {
     ingredienser.get(j).setMouseReleased(false);
