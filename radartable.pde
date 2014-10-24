@@ -103,7 +103,7 @@ File[] listFiles(String dir) {
 
 void mousePressed() {
   for (int i=0; i<protIngredienser.length; i++) {
-    boolean imagePressed = protIngredienser[i].pressingOfMouse();
+    boolean imagePressed = protIngredienser[i].pressingOfMouse(mouseX, mouseY);
 
     if (imagePressed) {
       PImage tempImage = protIngredienser[i].getUsedPicture();
@@ -114,7 +114,7 @@ void mousePressed() {
   }
   
   for (int j=0; j<ingredienser.size(); j++) {
-    boolean imagePressed2 = ingredienser.get(j).pressingOfMouse();
+    boolean imagePressed2 = ingredienser.get(j).pressingOfMouse(mouseX, mouseY);
   }
 }
 
@@ -122,7 +122,7 @@ void mouseDragged() {
 
   for (int i=0; i<ingredienser.size(); i++) {
 
-    ingredienser.get(i).mousedrag(); //check if mouse is dragging each circle
+    ingredienser.get(i).mousedrag(mouseX, mouseY); //check if mouse is dragging each circle
   }
 }
 

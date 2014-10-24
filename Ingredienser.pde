@@ -43,15 +43,16 @@ class Ingredienser { //the circles class. Here, everything concerning the change
     image(food, bx, by, foodWidth, foodHeight);
   }
 
-  void mousedrag() { //checks if the specific circle is pressed, and "pushes" a boolean, and changes the x and y variables to whereever the mouse is
+  void mousedrag(int x, int y) { //checks if the specific circle is pressed, and "pushes" a boolean, and changes the x and y variables to whereever the mouse is
+    println("mousedrag");
     if (locked) {
-      bx = mouseX-xOffset; 
-      by = mouseY-yOffset; 
+      bx = x-xOffset; 
+      by = y-yOffset; 
       println("yesss");
     }
   }
 
-  boolean pressingOfMouse() {
+  boolean pressingOfMouse(int x, int y) {
     println("jeps");
     if (overBox) { 
       locked = true; 
@@ -60,8 +61,8 @@ class Ingredienser { //the circles class. Here, everything concerning the change
     else {
       locked = false;
     }
-    xOffset = mouseX-bx; 
-    yOffset = mouseY-by;
+    xOffset = x-bx; 
+    yOffset = y-by;
     return locked;
   }
 
