@@ -18,17 +18,36 @@ void updateTuioObject (TuioObject tbri) {
 
 // Called when a cursor is added to the table
 void addTuioCursor(TuioCursor tcur) {
-  // ---PLACE CODE HERE---
+  for (int i=0; i<protIngredienser.length; i++) {
+    boolean imagePressed = protIngredienser[i].pressingOfMouse();
+
+    if (imagePressed) {
+      PImage tempImage = protIngredienser[i].getUsedPicture();
+      float tempX = protIngredienser[i].getX();
+      float tempY = protIngredienser[i].getY();
+      ingredienser.add(new Ingredienser(tempX, tempY, tempImage));
+    }
+  }
+  
+  for (int j=0; j<ingredienser.size(); j++) {
+    boolean imagePressed2 = ingredienser.get(j).pressingOfMouse();
+  }
 }
 
 // Called repeatedly, while a cursor is moved around on the table
 void updateTuioCursor (TuioCursor tcur) {
-  // ---PLACE CODE HERE---
+    
+  for (int i=0; i<ingredienser.size(); i++) {
+
+    ingredienser.get(i).mousedrag(); //check if mouse is dragging each circle
+  }
 }
 
 // Called when a cursor is removed from the table
 void removeTuioCursor(TuioCursor tcur) {
-  // ---PLACE CODE HERE---
+   for (int j=0; j<ingredienser.size(); j++) {
+    ingredienser.get(j).setMouseReleased(false);
+  }
 }
 
 // Automatically called after each package of data is recieved from TUIO,

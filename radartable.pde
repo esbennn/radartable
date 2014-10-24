@@ -13,29 +13,22 @@ void setup() {
 
   size(1000, 800);
 
-  /*for (int i=0; i<protIngredienser.length; i++) {
-    protIngredienser[i] = new Ingredienser (str(i), i*(width/6)+100, 100); //size and placement of circles
-  }*/
   tuioClient  = new TuioProcessing(this);
 
- // for (int i=0; i<protIngredienser.length; i++) {
- //   protIngredienser[i] = new Ingredienser (str(i), i*(width/6)+100, 100); //size and placement of circles
- // }
- String imgPath = sketchPath + "/pics";
- File[] files = listFiles(imgPath);
- println(files);
- println(files.length);
- protIngredienser = new Ingredienser[files.length];
- 
- for (int i = 0; i<files.length; i++){
-   //create image
-   PImage img = loadImage(files[i].toString());
-   //create new ingredient with above image
-   Ingredienser newIngredient = new Ingredienser(i*(width/files.length)+100, 100, img);
-   //add the ingredient to protIngredienser
-   protIngredienser[i] = newIngredient;
- }
+  String imgPath = sketchPath + "/pics";
+  File[] files = listFiles(imgPath);
+  println(files);
+  println(files.length);
+  protIngredienser = new Ingredienser[files.length];
 
+  for (int i = 0; i<files.length; i++) {
+    //create image
+    PImage img = loadImage(files[i].toString());
+    //create new ingredient with above image
+    Ingredienser newIngredient = new Ingredienser(i*(width/files.length)+100, 100, img);
+    //add the ingredient to protIngredienser
+    protIngredienser[i] = newIngredient;
+  }
 }
 
 void draw() {
@@ -52,6 +45,7 @@ void draw() {
   // Import all TUIO-objects on the table (as a "Vector"-object),
   // and store them in "TuioObjectList". A "Vector" is NOT like a vector in
   // mathematics - in this case, it is a sort of list of several "raw" TUIO-objects.
+  
   //DISKETTERELATERET KODE
   Vector TuioObjectList = tuioClient.getTuioObjects();
 
@@ -60,7 +54,8 @@ void draw() {
 
     float brickX = tbri.getScreenX(width);
     float brickY = tbri.getScreenY(height);
-
+    
+    
 
     stroke(50, 255, 0);       
     noFill();
@@ -72,7 +67,7 @@ void draw() {
 
   //FINGERRELATERET KODE
   Vector tuioCursorList = tuioClient.getTuioCursors();
-  
+
   for (int i=0;i<tuioCursorList.size();i++) {
     TuioCursor tcur = (TuioCursor)tuioCursorList.elementAt(i);
 
@@ -95,14 +90,15 @@ void draw() {
 
 //returnerer indholdet af den mappe, der gives med som argument
 File[] listFiles(String dir) {
- File file = new File(dir);
- if (file.isDirectory()) {
-   File[] files = file.listFiles();
-   return files;
- } else {
-   // .... hvis stien ikke er en mappe
-   return null;
- }
+  File file = new File(dir);
+  if (file.isDirectory()) {
+    File[] files = file.listFiles();
+    return files;
+  } 
+  else {
+    // .... hvis stien ikke er en mappe
+    return null;
+  }
 }
 
 void mousePressed() {
@@ -116,6 +112,7 @@ void mousePressed() {
       ingredienser.add(new Ingredienser(tempX, tempY, tempImage));
     }
   }
+  
   for (int j=0; j<ingredienser.size(); j++) {
     boolean imagePressed2 = ingredienser.get(j).pressingOfMouse();
   }
