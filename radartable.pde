@@ -37,11 +37,11 @@ void draw() {
   background (0, 0, 51);
   for (int i=0; i<protIngredienser.length; i++) {
 
-    protIngredienser[i].update(curX, curY);
+    protIngredienser[i].update();
   }
   for (int i=0; i<ingredienser.size(); i++) {
 //println(curX + curY);
-    ingredienser.get(i).update(curX, curY);
+    ingredienser.get(i).update();
     
   }
 

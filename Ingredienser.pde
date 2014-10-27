@@ -6,8 +6,8 @@ class Ingredienser { //the circles class. Here, everything concerning the change
   boolean overBox = false;
   float foodWidth = 80;
   float foodHeight = 80;
-  float xOffset = 0.0; 
-  float yOffset = 0.0; 
+  int xOffset = 0.0; 
+  int yOffset = 0.0; 
   boolean locked = false;
   float bx;
   float by;
@@ -42,21 +42,21 @@ class Ingredienser { //the circles class. Here, everything concerning the change
 //    imageMode(CENTER);
 //    image(food, bx, by, foodWidth, foodHeight);
 //  }
-    public void update(float x, float y) {
-      float tempX = x;
-      float tempY = y;
-      
-    if (tempX > bx-boxSize && tempX < bx+boxSize && 
-      tempY > by-boxSize && tempY < by+boxSize) {
-      overBox = true;  
-      if (!locked) { 
-        stroke(255);
-      }
-    } 
-    else {
-
-      overBox = false;
-    }
+    public void update() {
+//      float tempX = x;
+//      float tempY = y;
+//      
+//    if (tempX > bx-boxSize && tempX < bx+boxSize && 
+//      tempY > by-boxSize && tempY < by+boxSize) {
+//      overBox = true;  
+//      if (!locked) { 
+//        stroke(255);
+//      }
+//    } 
+//    else {
+//
+//      overBox = false;
+//    }
     imageMode(CENTER);
     image(food, bx, by, foodWidth, foodHeight);
   }
@@ -67,6 +67,12 @@ class Ingredienser { //the circles class. Here, everything concerning the change
     if (isMousePressed) {
       bx = x-xOffset; 
       by = y-yOffset; 
+      
+     println("box-coords: " + bx + " ; " + by);
+     println("cur-coords: " + x + " ; " + y);
+     //println("recalc: " + x-xOffset + " ; " + y-yOffset);
+     println("x: " + x + ", xOffset: " +xOffset);
+     
      
     }
   }

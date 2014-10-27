@@ -21,7 +21,7 @@ void addTuioCursor(TuioCursor tcur) {
   int x = tcur.getScreenX(width);
   int y = tcur.getScreenY(height);
   for (int i=0; i<protIngredienser.length; i++) {
-  //  boolean imagePressed = protIngredienser[i].pressingOfMouse(x, y);
+    //  boolean imagePressed = protIngredienser[i].pressingOfMouse(x, y);
     //println(imagePressed);
     if (protIngredienser[i].pressingOfMouse(x, y)) {
       PImage tempImage = protIngredienser[i].getUsedPicture();
@@ -38,11 +38,9 @@ void addTuioCursor(TuioCursor tcur) {
 
 // Called repeatedly, while a cursor is moved around on the table
 void updateTuioCursor (TuioCursor tcur) {
-println("tcur moved");
-println(ingredienser.size());
+  int x = tcur.getScreenX(width);
+  int y = tcur.getScreenY(height);
   for (int i=0; i<ingredienser.size (); i++) {
-    int x = tcur.getScreenX(width);
-    int y = tcur.getScreenY(height);
     ingredienser.get(i).mousedrag(x, y); //check if mouse is dragging each circle
   }
 }
