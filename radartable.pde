@@ -104,6 +104,7 @@ File[] listFiles(String dir) {
   }
 }
 
+/*
 void mousePressed() {
   for (int i=0; i<protIngredienser.length; i++) {
     boolean imagePressed = protIngredienser[i].pressingOfMouse(mouseX, mouseY);
@@ -131,12 +132,12 @@ void mouseDragged() {
 
 void mouseReleased() {
 
-  /*  for (int i=0; i<protIngredienser.length; i++) {
+    for (int i=0; i<protIngredienser.length; i++) {
    protIngredienser[i].setMouseReleased(false);
-   }*/
+   }
 
   for (int j=0; j<ingredienser.size(); j++) {
     ingredienser.get(j).setMouseReleased(false);
   }
 }
-
+*/

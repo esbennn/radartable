@@ -18,39 +18,38 @@ void updateTuioObject (TuioObject tbri) {
 
 // Called when a cursor is added to the table
 void addTuioCursor(TuioCursor tcur) {
+  int x = tcur.getScreenX(width);
+  int y = tcur.getScreenY(height);
   for (int i=0; i<protIngredienser.length; i++) {
-    int x = tcur.getScreenX(width);
-    int y = tcur.getScreenY(height);
-    boolean imagePressed = protIngredienser[i].pressingOfMouse(x,y);
-println(imagePressed);
-    if (imagePressed) {
+  //  boolean imagePressed = protIngredienser[i].pressingOfMouse(x, y);
+    //println(imagePressed);
+    if (protIngredienser[i].pressingOfMouse(x, y)) {
       PImage tempImage = protIngredienser[i].getUsedPicture();
       float tempX = protIngredienser[i].getX();
       float tempY = protIngredienser[i].getY();
       ingredienser.add(new Ingredienser(tempX, tempY, tempImage));
     }
   }
-  
-  for (int j=0; j<ingredienser.size(); j++) {
-   int x = tcur.getScreenX(width);
-    int y = tcur.getScreenY(height);
-    boolean imagePressed2 = ingredienser.get(j).pressingOfMouse(x, y);
+
+  for (int j=0; j<ingredienser.size (); j++) {
+    ingredienser.get(j).pressingOfMouse(x, y);
   }
 }
 
 // Called repeatedly, while a cursor is moved around on the table
 void updateTuioCursor (TuioCursor tcur) {
-    
-  for (int i=0; i<ingredienser.size(); i++) {
+println("tcur moved");
+println(ingredienser.size());
+  for (int i=0; i<ingredienser.size (); i++) {
     int x = tcur.getScreenX(width);
     int y = tcur.getScreenY(height);
-    ingredienser.get(i).mousedrag(x,y); //check if mouse is dragging each circle
+    ingredienser.get(i).mousedrag(x, y); //check if mouse is dragging each circle
   }
 }
 
 // Called when a cursor is removed from the table
 void removeTuioCursor(TuioCursor tcur) {
-   for (int j=0; j<ingredienser.size(); j++) {
+  for (int j=0; j<ingredienser.size (); j++) {
     ingredienser.get(j).setMouseReleased(false);
   }
 }
@@ -60,3 +59,4 @@ void removeTuioCursor(TuioCursor tcur) {
 void refresh(TuioTime bundleTime) { 
   redraw();
 }
+

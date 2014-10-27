@@ -27,21 +27,21 @@ class Ingredienser { //the circles class. Here, everything concerning the change
     by= _by;
     food = _image;
   }
-  public void update() {
-    if (mouseX > bx-boxSize && mouseX < bx+boxSize && 
-      mouseY > by-boxSize && mouseY < by+boxSize) {
-      overBox = true;  
-      if (!locked) { 
-        stroke(255);
-      }
-    } 
-    else {
-
-      overBox = false;
-    }
-    imageMode(CENTER);
-    image(food, bx, by, foodWidth, foodHeight);
-  }
+//  public void update() {
+//    if (mouseX > bx-boxSize && mouseX < bx+boxSize && 
+//      mouseY > by-boxSize && mouseY < by+boxSize) {
+//      overBox = true;  
+//      if (!locked) { 
+//        stroke(255);
+//      }
+//    } 
+//    else {
+//
+//      overBox = false;
+//    }
+//    imageMode(CENTER);
+//    image(food, bx, by, foodWidth, foodHeight);
+//  }
     public void update(float x, float y) {
       float tempX = x;
       float tempY = y;
@@ -62,8 +62,9 @@ class Ingredienser { //the circles class. Here, everything concerning the change
   }
 
   void mousedrag(int x, int y) { //checks if the specific circle is pressed, and "pushes" a boolean, and changes the x and y variables to whereever the mouse is
-  
-    if (locked) {
+  boolean isMousePressed = pressingOfMouse(x,y);
+  println(isMousePressed);
+    if (isMousePressed) {
       bx = x-xOffset; 
       by = y-yOffset; 
      
@@ -71,17 +72,20 @@ class Ingredienser { //the circles class. Here, everything concerning the change
   }
 
   boolean pressingOfMouse(int x, int y) {
-    
-    if (overBox) { 
-      locked = true; 
-      fill(255, 255, 255);
+    boolean mouseIsOver = false;
+    if (x > bx-boxSize && x < bx+boxSize && 
+      y > by-boxSize && y < by+boxSize) { 
+    //  locked = true; 
+    //  fill(255, 255, 255);
+    mouseIsOver = true;
     } 
-    else {
-      locked = false;
-    }
+//    else {
+//      locked = false;
+//    }
     xOffset = x-bx; 
     yOffset = y-by;
-    return locked;
+    //return locked;
+    return mouseIsOver;
   }
 
   void setMouseReleased(boolean released) {
