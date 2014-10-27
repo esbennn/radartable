@@ -25,14 +25,16 @@ void addTuioCursor(TuioCursor tcur) {
     //println(imagePressed);
     if (protIngredienser[i].pressingOfMouse(x, y)) {
       PImage tempImage = protIngredienser[i].getUsedPicture();
-      float tempX = protIngredienser[i].getX();
-      float tempY = protIngredienser[i].getY();
+      int tempX = protIngredienser[i].getX();
+      int tempY = protIngredienser[i].getY();
       ingredienser.add(new Ingredienser(tempX, tempY, tempImage));
     }
   }
 
   for (int j=0; j<ingredienser.size (); j++) {
-    ingredienser.get(j).pressingOfMouse(x, y);
+    if (ingredienser.get(j).pressingOfMouse(x, y)) {
+      ingredienser.get(j).unlock();
+    }
   }
 }
 
@@ -48,7 +50,7 @@ void updateTuioCursor (TuioCursor tcur) {
 // Called when a cursor is removed from the table
 void removeTuioCursor(TuioCursor tcur) {
   for (int j=0; j<ingredienser.size (); j++) {
-    ingredienser.get(j).setMouseReleased(false);
+    ingredienser.get(j).setMouseReleased();
   }
 }
 

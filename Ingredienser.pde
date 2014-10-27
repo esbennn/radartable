@@ -6,13 +6,13 @@ class Ingredienser { //the circles class. Here, everything concerning the change
   boolean overBox = false;
   float foodWidth = 80;
   float foodHeight = 80;
-  int xOffset = 0.0; 
-  int yOffset = 0.0; 
-  boolean locked = false;
-  float bx;
-  float by;
+  int xOffset = 0; 
+  int yOffset = 0; 
+  boolean locked = true;
+  int bx;
+  int by;
 
-  Ingredienser(String i, float _bx, float _by) {
+  Ingredienser(String i, int _bx, int _by) {
     clicked = false;
     dragged = false;
     food = loadImage("mad" +i+".png");
@@ -20,7 +20,7 @@ class Ingredienser { //the circles class. Here, everything concerning the change
     by= _by;
   }
 
-  Ingredienser(float _bx, float _by, PImage _image) {
+  Ingredienser(int _bx, int _by, PImage _image) {
     clicked = false;
     dragged = false;
     bx = _bx;
@@ -63,16 +63,19 @@ class Ingredienser { //the circles class. Here, everything concerning the change
 
   void mousedrag(int x, int y) { //checks if the specific circle is pressed, and "pushes" a boolean, and changes the x and y variables to whereever the mouse is
   boolean isMousePressed = pressingOfMouse(x,y);
-  println(isMousePressed);
-    if (isMousePressed) {
-      bx = x-xOffset; 
-      by = y-yOffset; 
+    if (isMousePressed && !locked) {
+      println(locked);
+      bx = x;//-xOffset; 
+      by = y;//-yOffset; 
       
-     println("box-coords: " + bx + " ; " + by);
-     println("cur-coords: " + x + " ; " + y);
-     //println("recalc: " + x-xOffset + " ; " + y-yOffset);
-     println("x: " + x + ", xOffset: " +xOffset);
-     
+//     println("box-coords: " + bx + " ; " + by);
+//     println("cur-coords: " + x + " ; " + y);
+//     println(y-yOffset);
+   //  println("x: " + x + ", xOffset: " +xOffset); 
+//       println(x);
+//       println(xOffset);
+//       println(bx);
+//     
      
     }
   }
@@ -94,19 +97,23 @@ class Ingredienser { //the circles class. Here, everything concerning the change
     return mouseIsOver;
   }
 
-  void setMouseReleased(boolean released) {
-    locked = released;
+  void setMouseReleased() {
+    locked = true;
+  }
+  
+  void unlock(){
+    locked = false;
   }
 
   PImage getUsedPicture() {
     return food;
   }
 
-  float getX() {
+  int getX() {
     return bx;
   }
 
-  float getY() {
+  int getY() {
     return by;
   }
 }
