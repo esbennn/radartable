@@ -6,6 +6,7 @@ float cursorSize = 20;
 float brickSize = 90;
 float fontSize = 8;
 PFont font;
+
 ArrayList <Ingredienser> ingredienser = new ArrayList<Ingredienser>();
 private Ingredienser[] protIngredienser;// = new Ingredienser[6];
 
