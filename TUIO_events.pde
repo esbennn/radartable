@@ -50,7 +50,7 @@ void updateTuioCursor (TuioCursor tcur) {
 // Called when a cursor is removed from the table
 void removeTuioCursor(TuioCursor tcur) {
   for (int j=0; j<ingredienser.size (); j++) {
-    ingredienser.get(j).setMouseReleased();
+    ingredienser.get(j).lock();
   }
 }
 

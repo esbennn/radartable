@@ -27,36 +27,8 @@ class Ingredienser { //the circles class. Here, everything concerning the change
     by= _by;
     food = _image;
   }
-//  public void update() {
-//    if (mouseX > bx-boxSize && mouseX < bx+boxSize && 
-//      mouseY > by-boxSize && mouseY < by+boxSize) {
-//      overBox = true;  
-//      if (!locked) { 
-//        stroke(255);
-//      }
-//    } 
-//    else {
-//
-//      overBox = false;
-//    }
-//    imageMode(CENTER);
-//    image(food, bx, by, foodWidth, foodHeight);
-//  }
+  
     public void update() {
-//      float tempX = x;
-//      float tempY = y;
-//      
-//    if (tempX > bx-boxSize && tempX < bx+boxSize && 
-//      tempY > by-boxSize && tempY < by+boxSize) {
-//      overBox = true;  
-//      if (!locked) { 
-//        stroke(255);
-//      }
-//    } 
-//    else {
-//
-//      overBox = false;
-//    }
     imageMode(CENTER);
     image(food, bx, by, foodWidth, foodHeight);
   }
@@ -65,18 +37,8 @@ class Ingredienser { //the circles class. Here, everything concerning the change
   boolean isMousePressed = pressingOfMouse(x,y);
     if (isMousePressed && !locked) {
       println(locked);
-      bx = x;//-xOffset; 
-      by = y;//-yOffset; 
-      
-//     println("box-coords: " + bx + " ; " + by);
-//     println("cur-coords: " + x + " ; " + y);
-//     println(y-yOffset);
-   //  println("x: " + x + ", xOffset: " +xOffset); 
-//       println(x);
-//       println(xOffset);
-//       println(bx);
-//     
-     
+      bx = x; 
+      by = y;
     }
   }
 
@@ -84,20 +46,14 @@ class Ingredienser { //the circles class. Here, everything concerning the change
     boolean mouseIsOver = false;
     if (x > bx-boxSize && x < bx+boxSize && 
       y > by-boxSize && y < by+boxSize) { 
-    //  locked = true; 
-    //  fill(255, 255, 255);
     mouseIsOver = true;
     } 
-//    else {
-//      locked = false;
-//    }
     xOffset = x-bx; 
     yOffset = y-by;
-    //return locked;
     return mouseIsOver;
   }
 
-  void setMouseReleased() {
+  void lock() {
     locked = true;
   }
   
