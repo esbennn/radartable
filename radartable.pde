@@ -37,14 +37,14 @@ void setup() {
 
 void draw() {
   background (0, 0, 51);
-    for (int i=0;i<disketteList.size();i++) {
+  for (int i=0; i<disketteList.size (); i++) {
     disketteList.get(i).drawBrick();
-}
+  }
   for (int i=0; i<protIngredienser.length; i++) {
 
     protIngredienser[i].update();
   }
-  for (int i=0; i<ingredienser.size(); i++) {
+  for (int i=0; i<ingredienser.size (); i++) {
     //println(curX + curY);
     ingredienser.get(i).update();
   }
@@ -54,14 +54,14 @@ void draw() {
   // mathematics - in this case, it is a sort of list of several "raw" TUIO-objects.
 
   //DISKETTERELATERET KODE
-//  Vector TuioObjectList = tuioClient.getTuioObjects();
+  //  Vector TuioObjectList = tuioClient.getTuioObjects();
 
 
 
   //FINGERRELATERET KODE
   Vector tuioCursorList = tuioClient.getTuioCursors();
 
-  for (int i=0;i<tuioCursorList.size();i++) {
+  for (int i=0; i<tuioCursorList.size (); i++) {
     TuioCursor tcur = (TuioCursor)tuioCursorList.elementAt(i);
 
     // Then, code for the individual TuioCursor (tcur) may be executed.
@@ -79,12 +79,17 @@ void draw() {
     // Draw an ellipse around the cursor
     ellipse(curX, curY, cursorSize, cursorSize);
   }
+  
+  //loop gennem alle ingredienser og check om de er oven i en diskette
+  for (int i=0; i<ingredienser.size(); i++){
+    ingredienser.get(i).setContainer(disketteList);
+  }
 }
 
 boolean checkTuioId(long id) {
   boolean idIsMatched = false;
 
-  for (int i=0; i<disketteList.size(); i++) {
+  for (int i=0; i<disketteList.size (); i++) {
     if (id == disketteList.get(i).getId()) {
 
       idIsMatched = true;
@@ -99,8 +104,7 @@ File[] listFiles(String dir) {
   if (file.isDirectory()) {
     File[] files = file.listFiles();
     return files;
-  } 
-  else {
+  } else {
     // .... hvis stien ikke er en mappe
     return null;
   }

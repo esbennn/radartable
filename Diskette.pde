@@ -44,12 +44,21 @@ class Diskette {
       else if (Speed<0 && radius > 90) {
         radius-=3;
       }
-      println(Speed);
+     // println(Speed);
     }
   }
 
   public long getId() {
     return this.id;
+  }
+  public float getX(){
+    return this.brickX;
+  }
+  public float getY() {
+    return this.brickY;
+  }
+  public float getRadius(){
+    return this.radius;
   }
   public void setOnScreen(boolean onScreen) {
     this.onScreen = onScreen;

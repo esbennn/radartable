@@ -1,5 +1,5 @@
 class Ingredienser { //the circles class. Here, everything concerning the change of the behavior and appearance of each circle is manipulated
-   PImage food;
+  PImage food;
   boolean clicked;
   boolean dragged;
   int boxSize = 50;
@@ -29,14 +29,19 @@ class Ingredienser { //the circles class. Here, everything concerning the change
     by= _by;
     food = _image;
   }
-  
-    public void update() {
+
+  public void update() {
     imageMode(CENTER);
-    image(food, bx, by, 80, 80);
+    image(food, bx, by, foodWidth, foodHeight);
   }
 
+/*  public void update(TuioObject tbri) {
+    imageMode(CENTER);
+    image(food, bx, by, 80, 80);
+  }*/
+
   void mousedrag(int x, int y) { //checks if the specific circle is pressed, and "pushes" a boolean, and changes the x and y variables to whereever the mouse is
-  boolean isMousePressed = pressingOfMouse(x,y);
+    boolean isMousePressed = pressingOfMouse(x, y);
     if (isMousePressed && !locked) {
       bx = x; 
       by = y;
@@ -47,7 +52,7 @@ class Ingredienser { //the circles class. Here, everything concerning the change
     boolean mouseIsOver = false;
     if (x > bx-boxSize && x < bx+boxSize && 
       y > by-boxSize && y < by+boxSize) { 
-    mouseIsOver = true;
+      mouseIsOver = true;
     } 
     xOffset = x-bx; 
     yOffset = y-by;
@@ -55,22 +60,30 @@ class Ingredienser { //the circles class. Here, everything concerning the change
   }
 
   void lock(long fingerId) {
-    if(fingerId == this.fingerId){
+    if (fingerId == this.fingerId) {
       locked = true;
-      println("object under finger #" + this.fingerId + " is now locked");
+    //  println("object under finger #" + this.fingerId + " is now locked");
       this.fingerId = 0;
     }
   }
-  
-  void unlock(long fingerId){
+
+  void unlock(long fingerId) {
     locked = false;
     this.fingerId = fingerId;
-    println("object under finger #" + this.fingerId + " is now unlocked");
+  //  println("object under finger #" + this.fingerId + " is now unlocked");
   }
-  
-  void setContainer(ArrayList<Diskette> disketter){
-  //  this.containerId = container.getId();
-  //  println("Ingredient is now in container #" + containerId);
+
+// DET HER SHIT VIRKER IKKE ---- GODDAMMIT!
+
+  void setContainer(ArrayList<Diskette> disketter) { 
+    for (int i=0; i<disketter.size(); i++){
+      float distance = dist(bx, by, disketter.get(i).getX(), disketter.get(i).getY());
+      println("distance: " +distance);
+      println("radius:" + disketter.get(i).getRadius());
+      if(distance < disketter.get(i).getRadius()){
+        println("i'm now owned by container #" + disketter.get(i).getId());
+      }
+    }
   }
 
   PImage getUsedPicture() {
