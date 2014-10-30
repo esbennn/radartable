@@ -46,6 +46,7 @@ void addTuioCursor(TuioCursor tcur) {
     //println(imagePressed);
     if (protIngredienser[i].pressingOfMouse(x, y)) {
       PImage tempImage = protIngredienser[i].getUsedPicture();
+  //    tempImage.resize(,);
       int tempX = protIngredienser[i].getX();
       int tempY = protIngredienser[i].getY();
       ingredienser.add(new Ingredienser(tempX, tempY, tempImage));

@@ -37,6 +37,9 @@ void setup() {
 
 void draw() {
   background (0, 0, 51);
+    for (int i=0;i<disketteList.size();i++) {
+    disketteList.get(i).drawBrick();
+}
   for (int i=0; i<protIngredienser.length; i++) {
 
     protIngredienser[i].update();
@@ -53,9 +56,7 @@ void draw() {
   //DISKETTERELATERET KODE
 //  Vector TuioObjectList = tuioClient.getTuioObjects();
 
-  for (int i=0;i<disketteList.size();i++) {
-    disketteList.get(i).drawBrick();
-}
+
 
   //FINGERRELATERET KODE
   Vector tuioCursorList = tuioClient.getTuioCursors();

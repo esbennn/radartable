@@ -26,22 +26,22 @@ class Diskette {
 
   void drawBrick() {
     if (onScreen) {
-      stroke(50, 255, 0);       
-      noFill();
+      stroke(#EAEAEA);       
+      fill(#EAEAEA);
       // Draw an ellipse around the brick
       ellipse(brickX, brickY, radius, radius);
-      fill(255);
+      //fill(255);
     }
   }
 
   void changeRadius(TuioObject tbri) {
-    // if(tbri.getRoationSpeed()>0.1)
+  
     if (tbri.getSymbolID() == this.id) { 
       float Speed = tbri.getRotationSpeed();
-      if (Speed>0) {
+      if (Speed>0 && radius < 300) {
         radius += 3;
       }
-      else if (Speed<0) {
+      else if (Speed<0 && radius > 90) {
         radius-=3;
       }
       println(Speed);
