@@ -31,7 +31,7 @@ class Ingredienser { //the circles class. Here, everything concerning the change
   
     public void update() {
     imageMode(CENTER);
-    image(food, bx, by, foodWidth, foodHeight);
+    image(food, bx, by, 80, 80);
   }
 
   void mousedrag(int x, int y) { //checks if the specific circle is pressed, and "pushes" a boolean, and changes the x and y variables to whereever the mouse is

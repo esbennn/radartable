@@ -6,6 +6,7 @@ float cursorSize = 20;
 float brickSize = 90;
 float fontSize = 8;
 PFont font;
+ArrayList<Diskette> disketteList = new ArrayList<Diskette>();
 
 ArrayList <Ingredienser> ingredienser = new ArrayList<Ingredienser>();
 private Ingredienser[] protIngredienser;// = new Ingredienser[6];
@@ -36,39 +37,26 @@ void setup() {
 
 void draw() {
   background (0, 0, 51);
+    for (int i=0;i<disketteList.size();i++) {
+    disketteList.get(i).drawBrick();
+}
   for (int i=0; i<protIngredienser.length; i++) {
 
     protIngredienser[i].update();
   }
   for (int i=0; i<ingredienser.size(); i++) {
-//println(curX + curY);
+    //println(curX + curY);
     ingredienser.get(i).update();
-    
   }
 
   // Import all TUIO-objects on the table (as a "Vector"-object),
   // and store them in "TuioObjectList". A "Vector" is NOT like a vector in
   // mathematics - in this case, it is a sort of list of several "raw" TUIO-objects.
-  
+
   //DISKETTERELATERET KODE
-  Vector TuioObjectList = tuioClient.getTuioObjects();
+//  Vector TuioObjectList = tuioClient.getTuioObjects();
 
-  for (int i=0;i<TuioObjectList.size();i++) {
-    TuioObject tbri = (TuioObject)TuioObjectList.elementAt(i);
-    
 
-    float brickX = tbri.getScreenX(width);
-    float brickY = tbri.getScreenY(height);
-    
-    
-
-    stroke(50, 255, 0);       
-    noFill();
-    // Draw an ellipse around the brick
-    ellipse(brickX, brickY, brickSize, brickSize);
-    fill(255);
-    text("ID || 0"+tbri.getSymbolID(), brickX, brickY-brickSize*0.55);
-  }
 
   //FINGERRELATERET KODE
   Vector tuioCursorList = tuioClient.getTuioCursors();
@@ -93,8 +81,16 @@ void draw() {
   }
 }
 
-checkTuioId(String id){
-  
+boolean checkTuioId(long id) {
+  boolean idIsMatched = false;
+
+  for (int i=0; i<disketteList.size(); i++) {
+    if (id == disketteList.get(i).getId()) {
+
+      idIsMatched = true;
+    }
+  }
+  return idIsMatched;
 }
 
 //returnerer indholdet af den mappe, der gives med som argument
@@ -110,40 +106,41 @@ File[] listFiles(String dir) {
   }
 }
 
+
 /*
 void mousePressed() {
-  for (int i=0; i<protIngredienser.length; i++) {
-    boolean imagePressed = protIngredienser[i].pressingOfMouse(mouseX, mouseY);
-
-    if (imagePressed) {
-      PImage tempImage = protIngredienser[i].getUsedPicture();
-      float tempX = protIngredienser[i].getX();
-      float tempY = protIngredienser[i].getY();
-      ingredienser.add(new Ingredienser(tempX, tempY, tempImage));
-    }
-  }
-  
-  for (int j=0; j<ingredienser.size(); j++) {
-    boolean imagePressed2 = ingredienser.get(j).pressingOfMouse(mouseX, mouseY);
-  }
-}
-
-void mouseDragged() {
-
-  for (int i=0; i<ingredienser.size(); i++) {
-
-    ingredienser.get(i).mousedrag(mouseX, mouseY); //check if mouse is dragging each circle
-  }
-}
-
-void mouseReleased() {
-
-    for (int i=0; i<protIngredienser.length; i++) {
-   protIngredienser[i].setMouseReleased(false);
-   }
-
-  for (int j=0; j<ingredienser.size(); j++) {
-    ingredienser.get(j).setMouseReleased(false);
-  }
-}
-*/
+ for (int i=0; i<protIngredienser.length; i++) {
+ boolean imagePressed = protIngredienser[i].pressingOfMouse(mouseX, mouseY);
+ 
+ if (imagePressed) {
+ PImage tempImage = protIngredienser[i].getUsedPicture();
+ float tempX = protIngredienser[i].getX();
+ float tempY = protIngredienser[i].getY();
+ ingredienser.add(new Ingredienser(tempX, tempY, tempImage));
+ }
+ }
+ 
+ for (int j=0; j<ingredienser.size(); j++) {
+ boolean imagePressed2 = ingredienser.get(j).pressingOfMouse(mouseX, mouseY);
+ }
+ }
+ 
+ void mouseDragged() {
+ 
+ for (int i=0; i<ingredienser.size(); i++) {
+ 
+ ingredienser.get(i).mousedrag(mouseX, mouseY); //check if mouse is dragging each circle
+ }
+ }
+ 
+ void mouseReleased() {
+ 
+ for (int i=0; i<protIngredienser.length; i++) {
+ protIngredienser[i].setMouseReleased(false);
+ }
+ 
+ for (int j=0; j<ingredienser.size(); j++) {
+ ingredienser.get(j).setMouseReleased(false);
+ }
+ }
+ */
