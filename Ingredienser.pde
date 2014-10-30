@@ -11,6 +11,7 @@ class Ingredienser { //the circles class. Here, everything concerning the change
   boolean locked = true;
   int bx;
   int by;
+  long fingerId; //for keeping track of which finger is over this particular image, so only this image gets locked when that finger is removed. Multitouch-support.
 
   Ingredienser(String i, int _bx, int _by) {
     clicked = false;
@@ -36,7 +37,6 @@ class Ingredienser { //the circles class. Here, everything concerning the change
   void mousedrag(int x, int y) { //checks if the specific circle is pressed, and "pushes" a boolean, and changes the x and y variables to whereever the mouse is
   boolean isMousePressed = pressingOfMouse(x,y);
     if (isMousePressed && !locked) {
-      println(locked);
       bx = x; 
       by = y;
     }
@@ -53,12 +53,18 @@ class Ingredienser { //the circles class. Here, everything concerning the change
     return mouseIsOver;
   }
 
-  void lock() {
-    locked = true;
+  void lock(long fingerId) {
+    if(fingerId == this.fingerId){
+      locked = true;
+      println("object under finger #" + this.fingerId + " is now locked");
+      this.fingerId = 0;
+    }
   }
   
-  void unlock(){
+  void unlock(long fingerId){
     locked = false;
+    this.fingerId = fingerId;
+    println("object under finger #" + this.fingerId + " is now unlocked");
   }
 
   PImage getUsedPicture() {

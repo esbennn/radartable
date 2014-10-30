@@ -3,9 +3,7 @@
 
 // Called when an object (tbri) is added to the table
 void addTuioObject(TuioObject tbri) {
-  for(int i=0; i<disketteList.size(); i++) {
-  checkForTuioId(tbri.getSymbolID())
- 
+  // ---PLACE CODE HERE---
 }
 
 // Called when an object is removed from the table
@@ -23,8 +21,6 @@ void addTuioCursor(TuioCursor tcur) {
   int x = tcur.getScreenX(width);
   int y = tcur.getScreenY(height);
   for (int i=0; i<protIngredienser.length; i++) {
-    //  boolean imagePressed = protIngredienser[i].pressingOfMouse(x, y);
-    //println(imagePressed);
     if (protIngredienser[i].pressingOfMouse(x, y)) {
       PImage tempImage = protIngredienser[i].getUsedPicture();
       int tempX = protIngredienser[i].getX();
@@ -35,7 +31,7 @@ void addTuioCursor(TuioCursor tcur) {
 
   for (int j=0; j<ingredienser.size (); j++) {
     if (ingredienser.get(j).pressingOfMouse(x, y)) {
-      ingredienser.get(j).unlock();
+      ingredienser.get(j).unlock(tcur.getSessionID());
     }
   }
 }
@@ -52,7 +48,7 @@ void updateTuioCursor (TuioCursor tcur) {
 // Called when a cursor is removed from the table
 void removeTuioCursor(TuioCursor tcur) {
   for (int j=0; j<ingredienser.size (); j++) {
-    ingredienser.get(j).lock();
+    ingredienser.get(j).lock(tcur.getSessionID());
   }
 }
 
