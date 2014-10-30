@@ -3,19 +3,38 @@
 
 // Called when an object (tbri) is added to the table
 void addTuioObject(TuioObject tbri) {
-  for(int i=0; i<disketteList.size(); i++) {
-  checkForTuioId(tbri.getSymbolID())
- 
+
+  if (!checkTuioId(tbri.getSymbolID())) {
+    disketteList.add(new Diskette(tbri));
+  }
+  else {
+    for (int i = 0; i < disketteList.size() ; i++) {
+      if (disketteList.get(i).getId() == tbri.getSymbolID()) {
+        disketteList.get(i).setOnScreen(true);
+      }
+    }
+  }
 }
 
 // Called when an object is removed from the table
 void removeTuioObject(TuioObject tbri) {
-  // ---PLACE CODE HERE---
+  for (int i = 0 ; i<disketteList.size() ; i++) {
+    if (disketteList.get(i).getId() == tbri.getSymbolID()) {
+      disketteList.get(i).setOnScreen(false);
+    }
+  }
 }
 
 // Called repeatedly, while an object is moved around on the table
 void updateTuioObject (TuioObject tbri) {
-  // ---PLACE CODE HERE---
+  for (int i=0; i<disketteList.size(); i++) {
+    if (tbri.getSymbolID()==disketteList.get(i).getId()) {
+      disketteList.get(i).update(tbri);
+    }
+  }
+  for (int i=0; i<disketteList.size(); i++) {
+    disketteList.get(i).changeRadius(tbri);
+  }
 }
 
 // Called when a cursor is added to the table
