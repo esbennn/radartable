@@ -12,6 +12,7 @@ class Ingredienser { //the circles class. Here, everything concerning the change
   int bx;
   int by;
   long fingerId; //for keeping track of which finger is over this particular image, so only this image gets locked when that finger is removed. Multitouch-support.
+  long containerId; //for keeping track of which container this ingredient is in
 
   Ingredienser(String i, int _bx, int _by) {
     clicked = false;
@@ -65,6 +66,11 @@ class Ingredienser { //the circles class. Here, everything concerning the change
     locked = false;
     this.fingerId = fingerId;
     println("object under finger #" + this.fingerId + " is now unlocked");
+  }
+  
+  void setContainer(ArrayList<Diskette> disketter){
+  //  this.containerId = container.getId();
+  //  println("Ingredient is now in container #" + containerId);
   }
 
   PImage getUsedPicture() {
