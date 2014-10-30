@@ -3,7 +3,9 @@
 
 // Called when an object (tbri) is added to the table
 void addTuioObject(TuioObject tbri) {
-  // ---PLACE CODE HERE---
+  for(int i=0; i<disketteList.size(); i++) {
+  checkForTuioId(tbri.getSymbolID())
+ 
 }
 
 // Called when an object is removed from the table

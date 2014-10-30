@@ -55,6 +55,7 @@ void draw() {
 
   for (int i=0;i<TuioObjectList.size();i++) {
     TuioObject tbri = (TuioObject)TuioObjectList.elementAt(i);
+    
 
     float brickX = tbri.getScreenX(width);
     float brickY = tbri.getScreenY(height);
@@ -90,6 +91,10 @@ void draw() {
     // Draw an ellipse around the cursor
     ellipse(curX, curY, cursorSize, cursorSize);
   }
+}
+
+checkTuioId(String id){
+  
 }
 
 //returnerer indholdet af den mappe, der gives med som argument
