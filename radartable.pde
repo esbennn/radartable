@@ -29,7 +29,7 @@ void setup() {
     //create image
     PImage img = loadImage(files[i].toString());
     //create new ingredient with above image
-    Ingredienser newIngredient = new Ingredienser(i*(width/files.length)+100, 100, img);
+    Ingredienser newIngredient = new Ingredienser(i*(width/files.length)+100, 50, img);
     //add the ingredient to protIngredienser
     protIngredienser[i] = newIngredient;
   }
@@ -44,6 +44,12 @@ void draw() {
 
     protIngredienser[i].update();
   }
+  
+  //draw a line under protingredients
+  
+  stroke(#3C3C71);
+  line(0,100,width,100);
+  
   for (int i=0; i<ingredienser.size (); i++) {
     //println(curX + curY);
     ingredienser.get(i).update();

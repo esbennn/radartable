@@ -2,7 +2,7 @@ class Diskette {
   float brickX;
   float brickY;
   long id;
-  float radius = 90;
+  float radius = 50;
   boolean onScreen = true;
 
   Diskette(TuioObject tbri) {
@@ -29,8 +29,8 @@ class Diskette {
       stroke(#EAEAEA);       
       fill(#EAEAEA);
       // Draw an ellipse around the brick
+      ellipseMode(RADIUS);
       ellipse(brickX, brickY, radius, radius);
-      //fill(255);
     }
   }
 
@@ -38,10 +38,10 @@ class Diskette {
   
     if (tbri.getSymbolID() == this.id) { 
       float Speed = tbri.getRotationSpeed();
-      if (Speed>0 && radius < 300) {
+      if (Speed>0 && radius < 250) {
         radius += 3;
       }
-      else if (Speed<0 && radius > 90) {
+      else if (Speed<0 && radius > 50) {
         radius-=3;
       }
      // println(Speed);

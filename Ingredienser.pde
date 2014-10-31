@@ -13,6 +13,8 @@ class Ingredienser { //the circles class. Here, everything concerning the change
   int by;
   long fingerId; //for keeping track of which finger is over this particular image, so only this image gets locked when that finger is removed. Multitouch-support.
   long containerId; //for keeping track of which container this ingredient is in
+  float containerDistX = 0;
+  float containerDistY = 0;
 
   Ingredienser(String i, int _bx, int _by) {
     clicked = false;
@@ -73,15 +75,21 @@ class Ingredienser { //the circles class. Here, everything concerning the change
   //  println("object under finger #" + this.fingerId + " is now unlocked");
   }
 
-// DET HER SHIT VIRKER IKKE ---- GODDAMMIT!
 
   void setContainer(ArrayList<Diskette> disketter) { 
     for (int i=0; i<disketter.size(); i++){
       float distance = dist(bx, by, disketter.get(i).getX(), disketter.get(i).getY());
-      println("distance: " +distance);
-      println("radius:" + disketter.get(i).getRadius());
-      if(distance < disketter.get(i).getRadius()){
-        println("i'm now owned by container #" + disketter.get(i).getId());
+   //   println("distance: " +distance);
+        containerDistX = disketter.get(i).getX() -bx;
+        containerDistY = disketter.get(i).getY() - by;
+   //   println("radius:" + disketter.get(i).getRadius());
+      if(distance < disketter.get(i).getRadius()-20){
+        //println("i'm now owned by container #" + disketter.get(i).getId());
+        containerId = disketter.get(i).getId();
+        println("distx: " + containerDistX);
+        bx = bx - (int) containerDistX;
+        println(bx);
+        by = by - (int) containerDistY;
       }
     }
   }
