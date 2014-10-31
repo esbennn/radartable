@@ -57,10 +57,11 @@ void addTuioCursor(TuioCursor tcur) {
   }
 
   for (int k=0; k<ingredienser.size (); k++) {
-    if (!ingredienser.get(j).pressingOfMouse(x, y)&&   ) {
+    long disketteId = disketteId(x,y);
+    if (!ingredienser.get(k).pressingOfMouse(x, y)&& disketteId!= 0) {
       String pos = str(x) +","+ str(y);
-      String id = 
-        tegningList.add(new Tegning(pos, id));
+     
+        tegningList.add(new Tegning(pos, disketteId));
     }
   }
 }
