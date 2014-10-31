@@ -46,7 +46,7 @@ void addTuioCursor(TuioCursor tcur) {
     //println(imagePressed);
     if (protIngredienser[i].pressingOfMouse(x, y)) {
       PImage tempImage = protIngredienser[i].getUsedPicture();
-  //    tempImage.resize(,);
+      //    tempImage.resize(,);
       int tempX = protIngredienser[i].getX();
       int tempY = protIngredienser[i].getY();
       ingredienser.add(new Ingredienser(tempX, tempY, tempImage));
@@ -58,16 +58,14 @@ void addTuioCursor(TuioCursor tcur) {
       ingredienser.get(j).unlock();
     }
   }
-  
+
   for (int k=0; k<ingredienser.size (); k++) {
-    if (!ingredienser.get(j).pressingOfMouse(x, y)&& tegninger.insideCircle()){
-      tegningList.get(k).add(new point(x,y));
-      
+    if (!ingredienser.get(j).pressingOfMouse(x, y)&&   ) {
+      String pos = str(x) +","+ str(y);
+      String id = 
+        tegningList.add(new Tegning(pos, id));
     }
-    
   }
-  
-  
 }
 
 // Called repeatedly, while a cursor is moved around on the table
