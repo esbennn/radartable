@@ -8,6 +8,7 @@ float fontSize = 8;
 PFont font;
 ArrayList<Diskette> disketteList = new ArrayList<Diskette>();
 
+ArrayList<Tegning> tegningList = new ArrayList<TegningList>();
 ArrayList <Ingredienser> ingredienser = new ArrayList<Ingredienser>();
 private Ingredienser[] protIngredienser;// = new Ingredienser[6];
 
