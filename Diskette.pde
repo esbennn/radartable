@@ -1,4 +1,5 @@
 class Diskette {
+
   float brickX;
   float brickY;
   long id;

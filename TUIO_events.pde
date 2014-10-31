@@ -58,6 +58,16 @@ void addTuioCursor(TuioCursor tcur) {
       ingredienser.get(j).unlock();
     }
   }
+  
+  for (int k=0; k<ingredienser.size (); k++) {
+    if (!ingredienser.get(j).pressingOfMouse(x, y)&& tegninger.insideCircle()){
+      tegningList.get(k).add(new point(x,y));
+      
+    }
+    
+  }
+  
+  
 }
 
 // Called repeatedly, while a cursor is moved around on the table
