@@ -5,11 +5,15 @@
 void addTuioObject(TuioObject tbri) {
   if (!checkTuioId(tbri.getSymbolID())) {
     disketteList.add(new Diskette(tbri));
-  }
-  else {
-    for (int i = 0; i < disketteList.size() ; i++) {
+  } else {
+    for (int i = 0; i < disketteList.size (); i++) {
       if (disketteList.get(i).getId() == tbri.getSymbolID()) {
         disketteList.get(i).setOnScreen(true);
+      }
+    }
+    for (int i=0; i<ingredienser.size (); i++) {
+      if (ingredienser.get(i).getContainerId() == tbri.getSymbolID()) {
+        ingredienser.get(i).setVisibility(true);
       }
     }
   }
@@ -17,22 +21,30 @@ void addTuioObject(TuioObject tbri) {
 
 // Called when an object is removed from the table
 void removeTuioObject(TuioObject tbri) {
-  for (int i = 0 ; i<disketteList.size() ; i++) {
+  for (int i = 0; i<disketteList.size (); i++) {
     if (disketteList.get(i).getId() == tbri.getSymbolID()) {
       disketteList.get(i).setOnScreen(false);
+    }
+  }
+  for (int i=0; i<ingredienser.size (); i++) {
+    if (ingredienser.get(i).getContainerId() == tbri.getSymbolID()) {
+      ingredienser.get(i).setVisibility(false);
     }
   }
 }
 
 // Called repeatedly, while an object is moved around on the table
 void updateTuioObject (TuioObject tbri) {
-  for (int i=0; i<disketteList.size(); i++) {
+  for (int i=0; i<disketteList.size (); i++) {
     if (tbri.getSymbolID()==disketteList.get(i).getId()) {
       disketteList.get(i).update(tbri);
     }
   }
-  for (int i=0; i<disketteList.size(); i++) {
-    disketteList.get(i).changeRadius(tbri);
+
+  for (int i=0; i<ingredienser.size (); i++) {
+    if (ingredienser.get(i).getContainerId() == tbri.getSymbolID()) {
+      ingredienser.get(i).objectDrag(tbri);
+    }
   }
 }
 
@@ -43,7 +55,7 @@ void addTuioCursor(TuioCursor tcur) {
   for (int i=0; i<protIngredienser.length; i++) {
     if (protIngredienser[i].pressingOfMouse(x, y)) {
       PImage tempImage = protIngredienser[i].getUsedPicture();
-  //    tempImage.resize(,);
+      //    tempImage.resize(,);
       int tempX = protIngredienser[i].getX();
       int tempY = protIngredienser[i].getY();
       ingredienser.add(new Ingredienser(tempX, tempY, tempImage));
@@ -62,7 +74,8 @@ void updateTuioCursor (TuioCursor tcur) {
   int x = tcur.getScreenX(width);
   int y = tcur.getScreenY(height);
   for (int i=0; i<ingredienser.size (); i++) {
-    ingredienser.get(i).mousedrag(x, y); //check if mouse is dragging each circle
+    ingredienser.get(i).mousedrag(x, y); 
+    ingredienser.get(i).lockToObject(false);
   }
 }
 

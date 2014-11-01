@@ -21,6 +21,8 @@ class Diskette {
       //      ellipse(brickX, brickY, radius, radius);
       //      fill(255);
       //text("ID || 0"+tbri.getSymbolID(), brickX, brickY-brickSize*0.55);
+     // println("brick: " + brickX+" ; "+brickY);
+     changeRadius(tbri);
     }
   }
 

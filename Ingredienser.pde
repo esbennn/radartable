@@ -12,9 +12,11 @@ class Ingredienser { //the circles class. Here, everything concerning the change
   int bx;
   int by;
   long fingerId; //for keeping track of which finger is over this particular image, so only this image gets locked when that finger is removed. Multitouch-support.
-  long containerId; //for keeping track of which container this ingredient is in
-  float containerDistX = 0;
-  float containerDistY = 0;
+  Long containerId; //for keeping track of which container this ingredient is in
+  Float containerDistX = 0f;
+  Float containerDistY = 0f;
+  boolean lockedToObject = false;
+  boolean isVisible = true;
 
   Ingredienser(String i, int _bx, int _by) {
     clicked = false;
@@ -33,14 +35,16 @@ class Ingredienser { //the circles class. Here, everything concerning the change
   }
 
   public void update() {
-    imageMode(CENTER);
-    image(food, bx, by, foodWidth, foodHeight);
+    if (isVisible){
+      imageMode(CENTER);
+      image(food, bx, by, foodWidth, foodHeight);
+    }
   }
 
-/*  public void update(TuioObject tbri) {
-    imageMode(CENTER);
-    image(food, bx, by, 80, 80);
-  }*/
+  /*  public void update(TuioObject tbri) {
+   imageMode(CENTER);
+   image(food, bx, by, 80, 80);
+   }*/
 
   void mousedrag(int x, int y) { //checks if the specific circle is pressed, and "pushes" a boolean, and changes the x and y variables to whereever the mouse is
     boolean isMousePressed = pressingOfMouse(x, y);
@@ -64,7 +68,7 @@ class Ingredienser { //the circles class. Here, everything concerning the change
   void lock(long fingerId) {
     if (fingerId == this.fingerId) {
       locked = true;
-    //  println("object under finger #" + this.fingerId + " is now locked");
+      //  println("object under finger #" + this.fingerId + " is now locked");
       this.fingerId = 0;
     }
   }
@@ -72,30 +76,50 @@ class Ingredienser { //the circles class. Here, everything concerning the change
   void unlock(long fingerId) {
     locked = false;
     this.fingerId = fingerId;
-  //  println("object under finger #" + this.fingerId + " is now unlocked");
+    //  println("object under finger #" + this.fingerId + " is now unlocked");
+  }
+  
+  void lockToObject(boolean lock){
+    lockedToObject = lock;
   }
 
 
-  void setContainer(ArrayList<Diskette> disketter) { 
-    for (int i=0; i<disketter.size(); i++){
+  void setContainer(ArrayList<Diskette> disketter) {
+    for (int i=0; i<disketter.size (); i++) {
       float distance = dist(bx, by, disketter.get(i).getX(), disketter.get(i).getY());
-   //   println("distance: " +distance);
-        containerDistX = disketter.get(i).getX() -bx;
-        containerDistY = disketter.get(i).getY() - by;
-   //   println("radius:" + disketter.get(i).getRadius());
-      if(distance < disketter.get(i).getRadius()-20){
+      if (distance < disketter.get(i).getRadius()-20) {
         //println("i'm now owned by container #" + disketter.get(i).getId());
-        containerId = disketter.get(i).getId();
-        println("distx: " + containerDistX);
-        bx = bx - (int) containerDistX;
-        println(bx);
-        by = by - (int) containerDistY;
+        if(!lockedToObject){
+          containerId = disketter.get(i).getId();
+          
+          containerDistX = disketter.get(i).getX() -bx;
+          containerDistY = disketter.get(i).getY() - by;
+          
+          lockToObject(true);
+        }
+      } else {
+        lockToObject(false);
       }
+    }
+  }
+
+  void objectDrag(TuioObject tbri) {
+    if (lockedToObject){
+      float containerX = tbri.getScreenX(width);
+      float containerY = tbri.getScreenY(height);
+      float newX = containerX - containerDistX;
+      float newY = containerY - containerDistY;
+      bx = (int) newX;
+      by = (int) newY;
     }
   }
 
   PImage getUsedPicture() {
     return food;
+  }
+  
+  void setVisibility(boolean isVisible){
+    this.isVisible = isVisible;
   }
 
   int getX() {
@@ -104,6 +128,10 @@ class Ingredienser { //the circles class. Here, everything concerning the change
 
   int getY() {
     return by;
+  }
+
+  long getContainerId() {
+    return containerId;
   }
 }
 
