@@ -8,6 +8,7 @@ float fontSize = 8;
 PFont font;
 ArrayList<Diskette> disketteList = new ArrayList<Diskette>();
 
+ArrayList<Tegning> tegningList = new ArrayList<Tegning>();
 ArrayList <Ingredienser> ingredienser = new ArrayList<Ingredienser>();
 private Ingredienser[] protIngredienser;// = new Ingredienser[6];
 
@@ -44,12 +45,12 @@ void draw() {
 
     protIngredienser[i].update();
   }
-  
+
   //draw a line under protingredients
-  
+
   stroke(#3C3C71);
-  line(0,100,width,100);
-  
+  line(0, 100, width, 100);
+
   for (int i=0; i<ingredienser.size (); i++) {
     //println(curX + curY);
     ingredienser.get(i).update();
@@ -85,12 +86,35 @@ void draw() {
     // Draw an ellipse around the cursor
     ellipse(curX, curY, cursorSize, cursorSize);
   }
-  
+
   //loop gennem alle ingredienser og check om de er oven i en diskette
-  for (int i=0; i<ingredienser.size(); i++){
+  for (int i=0; i<ingredienser.size(); i++) {
     ingredienser.get(i).setContainer(disketteList);
   }
+
+  for (int i=0; i<tegningList.size(); i++) {
+    tegningList.get(i).update();
+  }
 }
+
+long disketteId(int x, int y) {
+  long containerId = 0;
+  for (int i=0; i<disketteList.size (); i++) {
+    float distance = dist(x, y, disketteList.get(i).getX(), disketteList.get(i).getY());
+
+    float containerDistX;
+    float containerDistY;
+    containerDistX = disketteList.get(i).getX() -x;
+    containerDistY = disketteList.get(i).getY() - y;
+    //   println("radius:" + disketter.get(i).getRadius());
+    if (distance < disketteList.get(i).getRadius()-20) {
+      //println("i'm now owned by container #" + disketter.get(i).getId());
+      containerId = disketteList.get(i).getId();
+    }
+  }
+  return containerId;
+}
+
 
 boolean checkTuioId(long id) {
   boolean idIsMatched = false;
@@ -110,7 +134,8 @@ File[] listFiles(String dir) {
   if (file.isDirectory()) {
     File[] files = file.listFiles();
     return files;
-  } else {
+  } 
+  else {
     // .... hvis stien ikke er en mappe
     return null;
   }

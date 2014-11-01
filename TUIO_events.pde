@@ -67,6 +67,15 @@ void addTuioCursor(TuioCursor tcur) {
       ingredienser.get(j).unlock(tcur.getSessionID());
     }
   }
+
+  for (int k=0; k<ingredienser.size (); k++) {
+    long disketteId = disketteId(x,y);
+    if (!ingredienser.get(k).pressingOfMouse(x, y)&& disketteId!= 0) {
+      String pos = str(x) +","+ str(y);
+     
+        tegningList.add(new Tegning(pos, disketteId));
+    }
+  }
 }
 
 // Called repeatedly, while a cursor is moved around on the table
