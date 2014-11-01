@@ -85,20 +85,22 @@ class Ingredienser { //the circles class. Here, everything concerning the change
 
 
   void setContainer(ArrayList<Diskette> disketter) {
+    lockToObject(false);
     for (int i=0; i<disketter.size (); i++) {
       float distance = dist(bx, by, disketter.get(i).getX(), disketter.get(i).getY());
       if (distance < disketter.get(i).getRadius()-20) {
         //println("i'm now owned by container #" + disketter.get(i).getId());
         if(!lockedToObject){
           containerId = disketter.get(i).getId();
-         // println(getUsedPicture() + " i'm now owned by container #" + disketter.get(i).getId());
+          println(getUsedPicture() + " i'm now owned by container #" + disketter.get(i).getId());
           containerDistX = disketter.get(i).getX() -bx;
           containerDistY = disketter.get(i).getY() - by;
           
           lockToObject(true);
+          println("Am i locked? " + lockedToObject);
         }
       } else {
-        lockToObject(false);
+        //lockToObject(false);
       }
     }
   }
@@ -130,7 +132,7 @@ class Ingredienser { //the circles class. Here, everything concerning the change
     return by;
   }
 
-  long getContainerId() {
+  Long getContainerId() {
     return containerId;
   }
 }
