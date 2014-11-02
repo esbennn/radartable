@@ -92,12 +92,12 @@ class Ingredienser { //the circles class. Here, everything concerning the change
         //println("i'm now owned by container #" + disketter.get(i).getId());
         if(!lockedToObject){
           containerId = disketter.get(i).getId();
-          println(getUsedPicture() + " i'm now owned by container #" + disketter.get(i).getId());
+          //println(getUsedPicture() + " i'm now owned by container #" + disketter.get(i).getId());
           containerDistX = disketter.get(i).getX() -bx;
           containerDistY = disketter.get(i).getY() - by;
           
           lockToObject(true);
-          println("Am i locked? " + lockedToObject);
+        //  println("Am i locked? " + lockedToObject);
         }
       } else {
         //lockToObject(false);

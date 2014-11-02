@@ -5,7 +5,8 @@
 void addTuioObject(TuioObject tbri) {
   if (!checkTuioId(tbri.getSymbolID())) {
     disketteList.add(new Diskette(tbri));
-  } else {
+  } 
+  else {
     for (int i = 0; i < disketteList.size (); i++) {
       if (disketteList.get(i).getId() == tbri.getSymbolID()) {
         disketteList.get(i).setOnScreen(true);
@@ -67,13 +68,14 @@ void addTuioCursor(TuioCursor tcur) {
       ingredienser.get(j).unlock(tcur.getSessionID());
     }
   }
-
+  // drawing objects are created and added to tegningList
   for (int k=0; k<ingredienser.size (); k++) {
-    long disketteId = disketteId(x,y);
-    if (!ingredienser.get(k).pressingOfMouse(x, y)&& disketteId!= 0) {
+    long disketteId = disketteId(x, y);
+
+    if (!ingredienser.get(k).pressingOfMouse(x, y)&& disketteId(x, y)!= 0) {
       String pos = str(x) +","+ str(y);
-     
-        tegningList.add(new Tegning(pos, disketteId));
+
+      tegningList.add(new Tegning(pos, disketteId));
     }
   }
 }
@@ -85,6 +87,19 @@ void updateTuioCursor (TuioCursor tcur) {
   for (int i=0; i<ingredienser.size (); i++) {
     ingredienser.get(i).mousedrag(x, y); 
     ingredienser.get(i).lockToObject(false);
+  }
+
+  //while drawing with finger, positions are added to the last tegning objects internal array
+  println(tegningList.size());
+  if (tegningList.size()>0) {
+    for (int k=0; k<ingredienser.size (); k++) {
+      if (!ingredienser.get(k).pressingOfMouse(x, y)&& disketteId(x, y)!= 0) {
+        String pos = str(x) +","+ str(y);
+        println("cursorUpdate bliver kørt");
+        tegningList.get(tegningList.size()-1).update(pos);
+        println("cursorUpdate bliver kørt");
+      }
+    }
   }
 }
 
