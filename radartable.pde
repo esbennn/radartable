@@ -93,14 +93,15 @@ void draw() {
   }
 
   for (int i=0; i<tegningList.size(); i++) {
+    tegningList.get(i).sendDisketteList(disketteList);
     tegningList.get(i).update();
   }
 }
 
 long disketteId(int x, int y) {
   long containerId = 0;
-  for (int i=0; i<disketteList.size (); i++) {
-    float distance = dist(x, y, disketteList.get(i).getX(), disketteList.get(i).getY());
+  for (int i=0; i<disketteList.size (); i++) {float
+     distance = dist(x, y, disketteList.get(i).getX(), disketteList.get(i).getY());
 
     float containerDistX;
     float containerDistY;

@@ -17,6 +17,12 @@ void addTuioObject(TuioObject tbri) {
         ingredienser.get(i).setVisibility(true);
       }
     }
+      for( int i = 0; i<tegningList.size();i++){
+    if (tegningList.get(i).getOwnerId() == tbri.getSymbolID()) {
+      tegningList.get(i).setVisibility(true);
+
+  }
+}
   }
 }
 
@@ -27,11 +33,18 @@ void removeTuioObject(TuioObject tbri) {
       disketteList.get(i).setOnScreen(false);
     }
   }
+
   for (int i=0; i<ingredienser.size (); i++) {
     if (ingredienser.get(i).getContainerId() == tbri.getSymbolID()) {
       ingredienser.get(i).setVisibility(false);
     }
   }
+  
+  for( int i = 0; i<tegningList.size();i++){
+    if (tegningList.get(i).getOwnerId() == tbri.getSymbolID()) {
+      tegningList.get(i).setVisibility(false);
+  }
+}
 }
 
 // Called repeatedly, while an object is moved around on the table
@@ -45,6 +58,14 @@ void updateTuioObject (TuioObject tbri) {
   for (int i=0; i<ingredienser.size (); i++) {
     if (ingredienser.get(i).getContainerId() == tbri.getSymbolID()) {
       ingredienser.get(i).objectDrag(tbri);
+    }
+  }
+
+  for (int i=0; i<tegningList.size (); i++) {
+    println(tegningList.size());
+    if (tegningList.get(i).getOwnerId() == tbri.getSymbolID()) {
+      println("object " +i+ " is dragged");
+      tegningList.get(i).objectDrag(tbri);
     }
   }
 }
@@ -69,14 +90,23 @@ void addTuioCursor(TuioCursor tcur) {
     }
   }
   // drawing objects are created and added to tegningList
-  for (int k=0; k<ingredienser.size (); k++) {
-    long disketteId = disketteId(x, y);
 
-    if (!ingredienser.get(k).pressingOfMouse(x, y)&& disketteId(x, y)!= 0) {
-      String pos = str(x) +","+ str(y);
+  long disketteId = disketteId(x, y);
+  if (ingredienser.size()>0) {
 
-      tegningList.add(new Tegning(pos, disketteId));
+    for (int k=0; k<ingredienser.size (); k++) {
+
+
+      if (!ingredienser.get(k).pressingOfMouse(x, y)&& disketteId(x, y)!= 0) {
+        // String pos = str(x) +","+ str(y);
+
+        tegningList.add(new Tegning(disketteId));
+      }
     }
+  }
+
+  else if (disketteId(x, y)!= 0) {
+    tegningList.add(new Tegning(disketteId));
   }
 }
 
@@ -90,18 +120,23 @@ void updateTuioCursor (TuioCursor tcur) {
   }
 
   //while drawing with finger, positions are added to the last tegning objects internal array
-  println(tegningList.size());
-  if (tegningList.size()>0) {
+  //println(tegningList.size());
+  if (tegningList.size()>0 && ingredienser.size()>0) {
     for (int k=0; k<ingredienser.size (); k++) {
-      if (!ingredienser.get(k).pressingOfMouse(x, y)&& disketteId(x, y)!= 0) {
-        String pos = str(x) +","+ str(y);
-        println("cursorUpdate bliver kørt");
-        tegningList.get(tegningList.size()-1).update(pos);
-        println("cursorUpdate bliver kørt");
+      if (!ingredienser.get(k).pressingOfMouse(x, y) && disketteId(x, y)!= 0) {
+
+
+        tegningList.get(tegningList.size()-1).update(x, y);
       }
     }
   }
+
+  else if (tegningList.size()>0 && disketteId(x, y)!= 0) {
+
+    tegningList.get(tegningList.size()-1).update(x, y);
+  }
 }
+
 
 // Called when a cursor is removed from the table
 void removeTuioCursor(TuioCursor tcur) {
