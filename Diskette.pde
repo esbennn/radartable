@@ -40,11 +40,12 @@ class Diskette {
   void changeRadius(TuioObject tbri) {
   
     if (tbri.getSymbolID() == this.id) { 
-      float Speed = tbri.getRotationSpeed();
-      if (Speed>0 && radius < 250) {
+      float speed = tbri.getRotationSpeed();
+      println(speed);
+      if (speed>0.8 && radius < 250) {
         radius += 3;
       }
-      else if (Speed<0 && radius > 50) {
+      else if (speed<-0.8 && radius > 50) {
         radius-=3;
       }
      // println(Speed);
