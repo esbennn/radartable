@@ -87,6 +87,7 @@ void addTuioCursor(TuioCursor tcur) {
   for (int j=0; j<ingredienser.size (); j++) {
     if (ingredienser.get(j).pressingOfMouse(x, y)) {
       ingredienser.get(j).unlock(tcur.getSessionID());
+      ingredienser.get(j).setOffSet(x,y);
     }
   }
   // drawing objects are created and added to tegningList
