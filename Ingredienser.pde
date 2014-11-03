@@ -12,7 +12,7 @@ class Ingredienser { //the circles class. Here, everything concerning the change
   int bx;
   int by;
   long fingerId; //for keeping track of which finger is over this particular image, so only this image gets locked when that finger is removed. Multitouch-support.
-  Long containerId; //for keeping track of which container this ingredient is in
+  Long containerId = 0l; //for keeping track of which container this ingredient is in
   Float containerDistX = 0f;
   Float containerDistY = 0f;
   boolean lockedToObject = false;
