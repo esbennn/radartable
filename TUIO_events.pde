@@ -121,20 +121,22 @@ void updateTuioCursor (TuioCursor tcur) {
 
   //while drawing with finger, positions are added to the last tegning objects internal array
   //println(tegningList.size());
-  if (tegningList.size()>0 && ingredienser.size()>0) {
+boolean shouldIDraw = true;
     for (int k=0; k<ingredienser.size (); k++) {
-      if (!ingredienser.get(k).pressingOfMouse(x, y) && disketteId(x, y)!= 0) {
-
-
-        tegningList.get(tegningList.size()-1).update(x, y);
+      if (ingredienser.get(k).pressingOfMouse(x, y)) {
+        shouldIDraw = false;
       }
     }
-  }
+    
+    if (shouldIDraw && disketteId(x,y)!=0){
+      tegningList.get(tegningList.size()-1).update(x, y);
+    }
+  
 
-  else if (tegningList.size()>0 && disketteId(x, y)!= 0) {
-
-    tegningList.get(tegningList.size()-1).update(x, y);
-  }
+//  else if (ingredienser.size()<1 && disketteId(x, y)!= 0) {
+//
+//    tegningList.get(tegningList.size()-1).update(x, y);
+//  }
 }
 
 
